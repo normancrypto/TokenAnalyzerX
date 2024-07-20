@@ -1,0 +1,27 @@
+# scripts/token_analysis.py
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_token_data(token_data):
+    """
+    Analyze token data.
+
+    :param token_data: List of token data dictionaries
+    :return: DataFrame with token data
+    """
+    df = pd.DataFrame(token_data)
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    return df.describe()
+
+def plot_token_data(df):
+    """
+    Plot token data.
+
+    :param df: DataFrame with token data
+    """
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    df.plot(x='timestamp', y='price', kind='line', title='Token Price Over Time')
+    plt.xlabel('Time')
+    plt.ylabel('Price')
+    plt.show()
